@@ -5,12 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CleverTap Support Connect</title>
     <style>
-        body { margin: 0; padding: 0; }
-        iframe { width: 100%; height: 100vh; border: none; }
-    </style>
-    <link rel="icon" type="image/x-icon" href="logo.png">
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      font-family: sans-serif;
+    }
+
+    .iframe-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .iframe-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+  </style>
 </head>
 <body>
+  <div class="iframe-container">
     <iframe src="https://script.google.com/macros/s/AKfycbyhBrWGFCwH1aVkdp8qq0nQ-Arhv2AUkdWCKrAHCj5frTIwZw3x3BVIiMwDJ56aN7AP/exec"></iframe>
+  </div>
 </body>
 </html>
