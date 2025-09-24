@@ -35,13 +35,19 @@
     // Extract query param from the parent URL
     const urlParams = new URLSearchParams(window.location.search);
     const ticketId = urlParams.get("ticketId");
+    const src = urlParams.get("src"); // optional param to differentiate "signature"
 
     // Base Apps Script deployment URL
     const baseURL = "https://script.google.com/macros/s/AKfycbxlHNffQfEwBN1UjeMACdN6IajYdb7zUHnb_NkIlGXs7n-q6fzKeKY0SStES86edSdO/exec";
 
+    let source = "Manual Entry";
+    if (ticketId) {
+    source = src === "signature" ? "Signature Link" : "Email Link";
+  }
+
     // Set iframe src with ticketId if available
     const iframe = document.getElementById("supportIframe");
-    iframe.src = ticketId ? `${baseURL}?ticketId=${encodeURIComponent(ticketId)}` : baseURL;
+    iframe.src = ticketId ? `${baseURL}?ticketId=${encodeURIComponent(ticketId)}&source=${encodeURIComponent(source)}` : baseURL;
   </script>
 </body>
 </html>
