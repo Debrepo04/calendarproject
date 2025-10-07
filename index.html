@@ -32,28 +32,23 @@
   </div>
 
   <script>
-    // Extract query param from the parent URL
+    // Extract query parameters
     const urlParams = new URLSearchParams(window.location.search);
     const ticketId = urlParams.get("ticketId");
-    const src = urlParams.get("src"); // optional param to differentiate "signature"
 
     // Base Apps Script deployment URL
-    const baseURL = "https://script.google.com/macros/s/AKfycbxlHNffQfEwBN1UjeMACdN6IajYdb7zUHnb_NkIlGXs7n-q6fzKeKY0SStES86edSdO/exec";
+    const baseURL = "https://script.google.com/macros/s/AKfycbwjJd8hgjZr8Y0DSToiGUl96ZVcNEHZWIfHiMNLuFKMHMdnCT_YLoEecFLBNyYhcWyF/exec";
 
-    let source = "Manual Entry"; // default
+    // ✅ Logic:
+    // Has ticketId → Email Link
+    // No ticketId → Signature Link
+    const source = ticketId ? "Email Link": "Signature Link";
 
-  if (ticketId) {
-    if (src && src.toLowerCase() === "signature") {
-      source = "Email Link";   // ✅ treat "signature" as Email Link
-    } else {
-      source = "Signature Link"; // fallback if we add other src types
-    }
-  }
-
-
-    // Set iframe src with ticketId if available
+    // Build iframe URL
     const iframe = document.getElementById("supportIframe");
-    iframe.src = ticketId ? `${baseURL}?ticketId=${encodeURIComponent(ticketId)}&source=${encodeURIComponent(source)}` : baseURL;
+    iframe.src = ticketId
+      ? `${baseURL}?ticketId=${encodeURIComponent(ticketId)}&source=${encodeURIComponent(source)}`
+      : `${baseURL}?source=${encodeURIComponent(source)}`;
   </script>
 </body>
 </html>
